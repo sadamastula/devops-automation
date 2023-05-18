@@ -14,7 +14,7 @@ pipeline {
         stage('Build docker image'){
             steps{
                 script{
-                    sh 'docker build -t venkateshsadamastula/carloan:latest .'
+                    sh 'docker build -t venkateshsadamastula/carloan .'
                 }
             }
         }
