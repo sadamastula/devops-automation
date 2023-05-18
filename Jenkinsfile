@@ -18,16 +18,13 @@ pipeline {
                 }
             }
         }
-        stage('Push image to hub'){
-            steps{
-                script{
-                    withCredentials([string(credentialsId: 'dockerhubpwd', variable: 'dockerhubpwd')]) {
-                    sh 'docker login -u venkateshsadamastula -p ${dockerhubpwd}'
-                        
-                    }
-                    sh 'docker push venkateshsadamastula/carloan:latest'
-                }
-            }
+        stage('Push Image to Docker Hub') {
+          steps {
+           sh    withCredentials([string(credentialsId: 'DOCKER', variable: 'passwd')]) {
+           sh    'docker login -u venkateshsadamastula -p ${passwd}'
+           sh    'docker push venkateshsadamastula/carloan'
+           }
+          }
         }
         stage('Deploy to K8s'){
             steps{
